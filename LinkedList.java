@@ -1,8 +1,4 @@
-//will be adding more methods soon
-
-package LinkedLists;
-
-public class LL {
+class LL2{
     static class Node{
         int val;
         Node next;
@@ -12,8 +8,11 @@ public class LL {
     }
     private Node head;
     private Node tail;
+    public boolean isEmpty(){
+        return head == null;
+    }
     public void addFirst(int val){
-        if (isEmpty()){
+        if (head == null){
             head = new Node(val);
             tail = head;
             return;
@@ -23,7 +22,7 @@ public class LL {
         head = newNode;
     }
     public void addLast(int val){
-        if (isEmpty()){
+        if (head == null){
             head = new Node(val);
             tail = head;
             return;
@@ -32,45 +31,34 @@ public class LL {
         tail.next = newNode;
         tail = newNode;
     }
-    public void PrintList(){
-        Node currNode = head;
-        System.out.print("Start ->");
-        while (currNode != null){
-            System.out.print(currNode.val + "->");
-            currNode = currNode.next;
-        }
-        System.out.print(" END");
-    }
     public void addAtIndex(int pos,int val){
         if (pos == 1){
             addFirst(val);
             return;
         }
         Node currNode = head;
+        Node prevNode = null;
         int count = 1;
-        while (count < pos - 1){
-            count++;
+        if (count < pos - 1){
+            prevNode = currNode;
             currNode = currNode.next;
         }
         Node newNode = new Node(val);
         newNode.next = currNode.next;
         currNode.next = newNode;
     }
-    public boolean isEmpty(){
-        return head == null;
-    }
-    public int deleteAtFirst(){
+    public int deleteFirst(){
         if (isEmpty()){
-            throw new RuntimeException("List Is Empty");
+            throw new RuntimeException();
         }
         Node currNode = head;
         head = head.next;
         currNode.next = null;
         return currNode.val;
     }
-    public int deleteLast(){
+    public int deleteAtLast(){
         if (isEmpty()){
-            throw new RuntimeException("List Is Empty");
+            throw new RuntimeException();
         }
         Node currNode = head;
         Node prevNode = null;
@@ -82,18 +70,47 @@ public class LL {
         tail = prevNode;
         return currNode.val;
     }
+    public int deleteAtIndex(int pos){
+        if (isEmpty()){
+            throw new RuntimeException();
+        }
+        if (pos == 1){
+            deleteAtLast();
+        }
+        Node currNode = head;
+        Node prvNode = null;
+        int count = 1;
+        while (count < pos){
+            count++;
+            prvNode = currNode;
+            currNode = currNode.next;
+        }
+        prvNode.next = currNode.next;
+        currNode.next = null;
+        return currNode.val;
+    }
     public boolean search(int val){
         Node currNode = head;
         while (currNode != null){
             if (val == currNode.val){
                 return true;
             }
-            currNode = currNode.next;
         }
         return false;
     }
+    public void display(){
+        Node currNode = head;
+        System.out.print("Start ->");
+        while (currNode != null){
+            System.out.print(currNode.val + "->");
+            currNode = currNode.next;
+        }
+        System.out.print("End");
+    }
+}
+public class Rough3 {
     public static void main(String[] args) {
-        LL ll = new LL();
+        LL2 ll = new LL2();
         ll.addFirst(5);
         ll.addFirst(4);
         ll.addFirst(3);
@@ -101,12 +118,9 @@ public class LL {
         ll.addFirst(1);
         ll.addLast(6);
         ll.addAtIndex(3,8);
-        ll.PrintList();
+        ll.display();
         System.out.println("\n");
-        ll.deleteAtFirst();
-        ll.PrintList();
-        System.out.println("\n");
-        ll.deleteLast();
-        ll.PrintList();
+        ll.deleteAtIndex(3);
+        ll.display();
     }
 }
