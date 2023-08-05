@@ -1,3 +1,5 @@
+//will be adding more methods soon
+
 package LinkedLists;
 
 public class LL {
