@@ -1,5 +1,5 @@
 package LinkedLists;
-
+ 
 public class LL {
     static class Node{
         int val;
