@@ -1,4 +1,6 @@
-class LL2{
+package LinkedLists;
+
+public class LL {
     static class Node{
         int val;
         Node next;
@@ -8,11 +10,8 @@ class LL2{
     }
     private Node head;
     private Node tail;
-    public boolean isEmpty(){
-        return head == null;
-    }
     public void addFirst(int val){
-        if (head == null){
+        if (isEmpty()){
             head = new Node(val);
             tail = head;
             return;
@@ -22,7 +21,7 @@ class LL2{
         head = newNode;
     }
     public void addLast(int val){
-        if (head == null){
+        if (isEmpty()){
             head = new Node(val);
             tail = head;
             return;
@@ -37,28 +36,30 @@ class LL2{
             return;
         }
         Node currNode = head;
-        Node prevNode = null;
         int count = 1;
-        if (count < pos - 1){
-            prevNode = currNode;
+        while (count < pos - 1){
+            count++;
             currNode = currNode.next;
         }
         Node newNode = new Node(val);
         newNode.next = currNode.next;
         currNode.next = newNode;
     }
-    public int deleteFirst(){
+    public boolean isEmpty(){
+        return head == null;
+    }
+    public int deleteAtFirst(){
         if (isEmpty()){
-            throw new RuntimeException();
+            throw new RuntimeException("List Is Empty");
         }
         Node currNode = head;
         head = head.next;
         currNode.next = null;
         return currNode.val;
     }
-    public int deleteAtLast(){
+    public int deleteLast(){
         if (isEmpty()){
-            throw new RuntimeException();
+            throw new RuntimeException("List Is Empty");
         }
         Node currNode = head;
         Node prevNode = null;
@@ -70,22 +71,22 @@ class LL2{
         tail = prevNode;
         return currNode.val;
     }
-    public int deleteAtIndex(int pos){
+    public  int deleteAtIndex(int pos){
         if (isEmpty()){
-            throw new RuntimeException();
+            throw new RuntimeException("List Is Empty");
         }
         if (pos == 1){
-            deleteAtLast();
+            deleteAtFirst();
         }
         Node currNode = head;
-        Node prvNode = null;
+        Node prevNode = null;
         int count = 1;
         while (count < pos){
             count++;
-            prvNode = currNode;
+            prevNode = currNode;
             currNode = currNode.next;
         }
-        prvNode.next = currNode.next;
+        prevNode.next = currNode.next;
         currNode.next = null;
         return currNode.val;
     }
@@ -95,22 +96,36 @@ class LL2{
             if (val == currNode.val){
                 return true;
             }
+            currNode = currNode.next;
         }
         return false;
     }
-    public void display(){
+    public void PrintList(){
         Node currNode = head;
         System.out.print("Start ->");
         while (currNode != null){
             System.out.print(currNode.val + "->");
             currNode = currNode.next;
         }
-        System.out.print("End");
+        System.out.print(" END");
     }
-}
-public class Rough3 {
+    public void reverseLinkedList(){
+        if (head == null || head.next == null){
+            return;
+        }
+        Node prevNode = head;
+        Node currNode = head.next;
+        while (currNode != null){
+            Node nextNode = currNode.next;
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        head.next = null;
+        head = prevNode;
+    }
     public static void main(String[] args) {
-        LL2 ll = new LL2();
+        LL ll = new LL();
         ll.addFirst(5);
         ll.addFirst(4);
         ll.addFirst(3);
@@ -118,9 +133,15 @@ public class Rough3 {
         ll.addFirst(1);
         ll.addLast(6);
         ll.addAtIndex(3,8);
-        ll.display();
+        ll.PrintList();
         System.out.println("\n");
-        ll.deleteAtIndex(3);
-        ll.display();
+        ll.deleteAtFirst();
+        ll.PrintList();
+        System.out.println("\n");
+        ll.deleteLast();
+        ll.PrintList();
+        System.out.println("\n");
+        ll.reverseLinkedList();
+        ll.PrintList();
     }
 }
