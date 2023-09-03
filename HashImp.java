@@ -124,7 +124,7 @@ class Hashing{
 }
 public class Rough7 {
     public static void main(String[] args) {
-
+        // Create Your HashMap Object here and Use put Func() to insert value in it.
     }
 }
 
