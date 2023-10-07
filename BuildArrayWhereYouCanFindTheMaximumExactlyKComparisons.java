@@ -1,5 +1,4 @@
 
-
 /*
  * @author Utkrist Ark
  * @date 07-10-2023
@@ -8,11 +7,13 @@
 
 package Arrays;
 
+import java.lang.Math;
+
 public class BuildArrayWhereYouCanFindTheMaximumExactlyKComparisons {
     static class Solution {
 
         int[][][] dp = new int[55][55][105];
-        int mod = 1000000000 + 7;
+        int mod = (int) Math.pow(10,7) + 7;
 
         int solve(int idx ,int lis ,int lar , int n , int m , int k)
         {
