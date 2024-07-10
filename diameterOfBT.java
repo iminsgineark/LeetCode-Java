@@ -10,7 +10,7 @@ public class diameterOfBT {
         }
     }
 
-    public int diameter(node root){
+    public static int diameter(node root){
         if (root == null){
             return 0;
         }
@@ -26,6 +26,15 @@ public class diameterOfBT {
         return 1 + Math.max(height(root.left),height(root.right));
     }
     public static void main(String[] args) {
+        node root = new node(1);
+        root.left = new node(2);
+        root.right = new node(3);
+        root.left.left = new node(4);
+        root.left.right = new node(5);
 
+        int treeHeight = height(root);
+        int treeDiameter = diameter(root);
+        System.out.println(treeHeight);
+        System.out.println(treeDiameter);
     }
 }
