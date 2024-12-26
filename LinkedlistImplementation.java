@@ -44,6 +44,33 @@ class LinkedList {
 	    size+=1;
     }
 
+    public void insertAtIndex(int val, int pos){
+	    if (pos == 0){
+		    insertFirst(val);
+		    return;
+	    }else if (pos==size){
+		    insertLast(val);
+		    return;
+	    }else{
+		    Node temp = head;
+		    for(int i = 1;i < pos; i++){
+			    temp = temp.next;
+		    }
+		    Node nd = new Node(val, temp.next);
+		    temp.next = nd;
+		    size++;
+	    }
+    }
+    public int deleteFirst(){
+	    int val = head.value;
+	    head = head.next;
+	    if(head == null){
+		    tail = null;
+	    }
+	    size--;
+	    return val;
+    }
+
     public void display() {
         Node temp = head;
         while (temp != null) {
@@ -61,11 +88,12 @@ class LinkedList {
 public class LinkedlistImplementation {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        list.insertFirst(10);
+	list.insertFirst(10);
         list.insertFirst(20);
         list.insertFirst(30);
-	    list.insertLast(32);
-	    list.insertFirst(33);
+	list.insertLast(32);
+	list.insertFirst(33);
+	list.insertAtIndex(87,2);
         list.display(); 
     }
 }
